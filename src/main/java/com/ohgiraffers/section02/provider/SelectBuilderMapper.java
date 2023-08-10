@@ -1,7 +1,9 @@
 package com.ohgiraffers.section02.provider;
 
 import com.ohgiraffers.common.MenuDTO;
+import com.ohgiraffers.common.SearchCriteria;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 
@@ -19,4 +21,8 @@ public interface SelectBuilderMapper {
 
     @SelectProvider(type = SelectBuilderProvider.class, method = "selectAllMenu")
     List<MenuDTO> selectAllMenu();
+
+    @ResultMap("menuResultMap")
+    @SelectProvider(type = SelectBuilderProvider.class, method = "searchMenuByCondition")
+    List<MenuDTO> searchMenuByCondition(SearchCriteria searchCriteria);
 }
